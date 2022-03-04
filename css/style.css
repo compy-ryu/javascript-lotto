@@ -1,169 +1,480 @@
 /*!*************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/css/index.scss ***!
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/css/Lotto.scss ***!
   \*************************************************************************************************************/
+@charset "UTF-8";
+/* 로또 기능 공유 스타일 */
+#app .lotto-title {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  margin: 1rem 0;
+}
+#app .lotto-title > *:last-child {
+  text-align: right;
+}
+#app section.show {
+  display: block;
+}
+
+/* 로또 금액 입력 View 스타일 */
+section.lotto-money-section .lotto-money-input-container {
+  display: grid;
+  grid-template-columns: 80% 15%;
+  gap: 5%;
+}
+
+/* 로또 목록 입력 View 스타일 */
+section.lotto-list-section {
+  display: none;
+}
+section.lotto-list-section .lotto-list-container {
+  display: grid;
+  grid-template-columns: 80% 15%;
+  gap: 5%;
+}
+section.lotto-list-section .lotto-list-container > div:last-child {
+  padding-left: 1rem;
+}
+section.lotto-list-section .lotto-item-container {
+  max-height: 15rem;
+  overflow-y: scroll;
+}
+section.lotto-list-section .lotto-item-container > .item {
+  display: inline-block;
+}
+section.lotto-list-section .lotto-item-container > .item > span {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+section.lotto-list-section .lotto-item-container > .item > span.item-number {
+  display: none;
+  font-size: 1rem;
+}
+section.lotto-list-section .lotto-item-container.list {
+  background-color: #f3f3f3;
+  border-radius: 6px;
+  padding: 0 1rem;
+}
+section.lotto-list-section .lotto-item-container.list > .item {
+  display: block;
+}
+section.lotto-list-section .lotto-item-container.list > .item > span.item-number {
+  display: inline-block;
+}
+
+/* 로또 당첨번호 입력 View 스타일 */
+section.winning-number-section {
+  display: none;
+}
+section.winning-number-section .winning-number-input-container {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  margin-bottom: 2rem;
+  gap: 0.3rem;
+}
+section.winning-number-section .winning-number-input-container > .winning-number-input {
+  width: 100%;
+  grid-column: 1 span;
+  text-align: center;
+  padding: 0.7rem 0 !important;
+}
+section.winning-number-section .winning-number-input-container .winning-number-input:last-child {
+  grid-column: 9;
+}
+
+/* 로또 결과 출력 View 스타일 */
+section#lotto-result-modal #lotto-result-list tr:hover {
+  background-color: #f3f3f3;
+}
+section#lotto-result-modal #lotto-result-list td.bold {
+  font-weight: bold;
+}
+section#lotto-result-modal #lotto-yield-text {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+section#lotto-result-modal #hide-result-button {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+}
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/css/layout.scss ***!
+  \**************************************************************************************************************/
+@charset "UTF-8";
 :root {
   font-size: 15px;
+  letter-spacing: 1px;
+}
+@media (max-width: 755px) {
+  :root {
+    font-size: 3vw;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+html[data-modal],
+body[data-modal] {
+  overflow-y: hidden;
 }
 
 body {
   background-color: #f9f9f9;
   font-family: "NanumBarunGothic", sans-serif;
+  margin: 0;
+  padding: 5.7rem;
+}
+@media (max-width: 755px) {
+  body {
+    padding: 0;
+  }
 }
 
 #app {
-  width: 27.6rem;
-  margin: 5.7rem auto;
-  padding: 1.05rem;
-  background-color: white;
+  width: 29rem;
+  margin: 0 auto;
+  padding: 1.05rem 1.6rem;
+  background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
 }
-#app header {
-  text-align: center;
+@media (max-width: 755px) {
+  #app {
+    width: 100%;
+  }
 }
-#app input[type=number] {
+#app button.btn {
+  width: 100%;
+  max-height: 100%;
+  background-color: #00bcd4;
+  color: #fff;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: filter 0.2s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+#app button.btn:disabled {
+  background-color: #b4b4b4;
+  cursor: default;
+}
+#app button.btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+#app input[type=number],
+#app input[type=text] {
+  width: 100%;
   border: 1px solid #b4b4b4;
-  border-radius: 5px;
+  border-radius: 6px;
   box-shadow: none;
   font-size: 1.1rem;
+  padding: 0.7rem;
   -moz-appearance: textfield;
+  transition: border ease 0.2s, background-color ease 0.2s;
 }
-#app input[type=number]::-webkit-outer-spin-button, #app input[type=number]::-webkit-inner-spin-button {
+#app input[type=number]:focus,
+#app input[type=text]:focus {
+  outline: 1px solid #00bcd4;
+}
+#app input[type=number]::-webkit-outer-spin-button, #app input[type=number]::-webkit-inner-spin-button,
+#app input[type=text]::-webkit-outer-spin-button,
+#app input[type=text]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#app .btn {
-  background-color: #00bcd4;
-  color: white;
+#app input[type=number].error,
+#app input[type=text].error {
+  border-color: #ee5353;
+  background-color: #f4dddd;
+  animation: 0.13s ease-out 3 uhxpx8g;
+}
+#app input[type=number].error:focus,
+#app input[type=text].error:focus {
+  outline-color: #ddd;
+}
+#app input[type=number].error::placeholder,
+#app input[type=text].error::placeholder {
+  color: #8e3d3d;
+}
+@keyframes uhxpx8g {
+  0% {
+    transform: translateX(-1rem);
+  }
+  50% {
+    transform: translateX(1rem);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+#app .table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border-top: 1px solid #dcdcdc;
+  margin-bottom: 1.6rem;
+}
+#app .table tr {
   border: none;
-  padding: 0.5rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
 }
-#app .btn:hover {
-  filter: brightness(1.1);
+#app .table th,
+#app .table td {
+  padding: 0.7rem 0;
+  border: none;
+  border-bottom: 1px solid #dcdcdc;
 }
-
-.lotto-money-section {
-  margin: 1rem 0;
-}
-
-.lotto-money-input-container {
-  display: grid;
-  grid-template-columns: 80% 15%;
-  justify-content: space-between;
-  margin-top: 0.8rem;
-}
-
-.lotto-list-section {
-  display: none;
-}
-
-.lotto-list-section.show {
-  display: block;
-}
-
-.lotto-list-container {
-  display: grid;
-  grid-template-columns: 80% 10%;
-  justify-content: space-between;
-}
-
-.lotto-title {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.6rem 0;
-}
-
-.lotto-list-container > div:last-child {
-  padding: 0.5rem 0;
-}
-
-#lotto-number-toggle {
+#app .toggle {
   position: relative;
   width: 100%;
-  height: 1.5rem;
+}
+#app .toggle::before {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 15%;
+  bottom: 15%;
+  background-color: #f3f3f3;
+  border-radius: 12px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.08);
+  transition: filter 0.2s ease, background-color 0.5s ease;
+  content: "";
   cursor: pointer;
 }
-#lotto-number-toggle::before {
-  position: absolute;
-  top: 0.15rem;
+#app .toggle::after {
   display: block;
   content: "";
-  width: 100%;
-  height: 1.2rem;
-  border-radius: 5px;
-  background-color: #ededed;
-  transition: background-color ease 0.3s;
+  padding-bottom: 50%;
 }
-#lotto-number-toggle[data-state=on]::before {
-  background-color: #80deea;
-}
-#lotto-number-toggle::after {
+#app .toggle > .pointer {
   position: absolute;
-  top: 0px;
-  display: block;
-  content: "";
+  width: 50%;
   border-radius: 50%;
-  background-color: #ededed;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.12);
-  width: 1.5rem;
-  height: 100%;
-  transition: transform ease 0.3s, background-color ease 0.3s;
+  background-color: #cccccc;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.08);
+  transition: filter 0.3s ease, transform 0.2s ease, background-color 0.5s ease;
+  cursor: pointer;
 }
-#lotto-number-toggle[data-state=on]::after {
+#app .toggle > .pointer::after {
+  display: block;
+  content: "";
+  padding-bottom: 100%;
+}
+#app .toggle.on::before {
+  background-color: #00bcd4;
+  opacity: 0.2;
+}
+#app .toggle.on .pointer {
   background-color: #00bcd4;
   transform: translateX(100%);
+  opacity: 0.5;
 }
-
-.lotto-item-container {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
+#app .toggle:hover::before {
+  filter: brightness(0.9);
 }
-.lotto-item-container > .item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 2rem;
-  grid-column: 1 span;
+#app .toggle:hover .pointer {
+  filter: brightness(0.9);
 }
-.lotto-item-container > .item .item-number {
+#app .error-message {
   display: none;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  color: #ee5353;
 }
-.lotto-item-container[data-list=open] > .item {
-  grid-column: 8 span;
+#app .error-message.show {
+  display: block;
+  animation: 0.3s ease uhxpx94;
 }
-.lotto-item-container[data-list=open] > .item .item-number {
+@keyframes uhxpx94 {
+  from {
+    opacity: 0;
+    transform: translateX(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+#app .error-message::before {
+  content: "🚨";
+  font-size: 0.7rem;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+#app .modal-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+  top: 0px;
+  left: 0px;
+  overflow-y: scroll;
+  padding-bottom: 5rem;
+  animation: 0.3s ease uhxpx9h;
+}
+@keyframes uhxpx9h {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0rem);
+    -webkit-backdrop-filter: blur(0rem);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+  }
+}
+#app .modal-container .modal-form {
+  position: relative;
+  display: none;
+  width: 25rem;
+  min-height: 30rem;
+  background-color: #fff;
+  border-radius: 6px;
+  margin: 0 auto;
+  padding: 0.7rem;
+  top: 15%;
+  box-shadow: 0 0 10rem 0.5rem rgba(0, 0, 0, 0.55);
+  animation: 0.3s ease uhxpx9l;
+}
+@media (max-width: 755px) {
+  #app .modal-container .modal-form {
+    position: absolute;
+    width: 90%;
+    min-height: unset;
+    max-height: 70%;
+    top: unset;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+  }
+}
+#app .modal-container .modal-form.focus {
   display: block;
 }
-
-.lotto-list-section,
-.winning-number-section {
-  margin-top: 2rem;
+#app .modal-container .modal-form > .modal-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+#app .modal-container .modal-form > .modal-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0 0.25rem;
+  color: #323232;
+  cursor: pointer;
+}
+#app .modal-container .modal-form > .modal-close::before {
+  content: "X";
+  transform: scaleY(0.8);
+  display: block;
+}
+#app .modal-container .modal-form > .modal-close:hover {
+  opacity: 0.6;
+}
+#app .modal-container .modal-form .modal-content {
+  padding-bottom: 2rem;
+}
+@keyframes uhxpx9l {
+  from {
+    opacity: 0;
+    transform: translateY(-30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@media (max-width: 755px) {
+  #app .modal-container .modal-form {
+    animation: 0.3s ease uhxpx9z;
+  }
+  @keyframes uhxpx9z {
+    from {
+      opacity: 0;
+      transform: translate3d(-50%, -30%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(-50%, 0%, 0);
+    }
+  }
+}
+#app .modal-container.disappear {
+  animation: 0.3s ease uhxpxa0;
+}
+@keyframes uhxpxa0 {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+  }
+}
+#app .modal-container.disappear .modal-form {
+  animation: 0.3s ease uhxpxa9;
+}
+@keyframes uhxpxa9 {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30%);
+  }
+}
+@media (max-width: 755px) {
+  #app .modal-container.disappear .modal-form {
+    animation: 0.3s ease uhxpxac;
+  }
+  @keyframes uhxpxac {
+    from {
+      opacity: 1;
+      transform: translate3d(-50%, 0%, 0);
+    }
+    to {
+      opacity: 0;
+      transform: translate3d(-50%, -30%, 0);
+    }
+  }
+}
+#app .modal-container.hide {
+  display: none;
 }
 
-.winning-number-container {
-  display: flex;
-  flex-direction: column;
+header {
+  padding: 10px 0;
 }
-
-.winning-number-input-container {
-  display: flex;
-  justify-content: space-between;
-}
-.winning-number-input-container .winning-number-inputs-container {
-  display: flex;
-  gap: 0.5rem;
-}
-.winning-number-input-container .winning-number-input {
-  width: 2.2rem;
-  height: 2.2rem;
+header > h1 {
+  margin: 20px 0;
+  font-size: 2.2rem;
   text-align: center;
 }
 
-#show-result-button {
-  margin-top: 1.2rem;
+main > section {
+  margin-bottom: 1.8rem;
+}
+main form > label {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 /*# sourceMappingURL=style.css.map*/
