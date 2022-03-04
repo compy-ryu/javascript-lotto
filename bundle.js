@@ -37,7 +37,7 @@ var SELECTOR = Object.freeze({
   LOTTO_BOUGHT_COUNT: '#lotto-bought-count',
   LOTTO_SHOW_RESULT_BUTTON: '#show-result-button',
   LOTTO_RESULT_LIST: '#lotto-result-list',
-  LOTTO_YIELD_TEXT: '#lotto-yield-text',
+  LOTTO_PROFIT_RATIO_TEXT: '#lotto-profit-ratio-text',
   LOTTO_RETRY_BUTTON: '#lotto-retry-button',
   LOTTO_RESULT_MODAL: '#lotto-result-modal',
   LOTTO_NUMBER_TOGGLE: '.lotto-number-toggle',
@@ -235,11 +235,11 @@ var LottoController = /*#__PURE__*/function () {
 
         var _classPrivateFieldGet2 = (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _LottosModel).result,
             winningRankCountList = _classPrivateFieldGet2.winningRankCountList,
-            playerLottoYield = _classPrivateFieldGet2.playerLottoYield;
+            playerLottoProfitRatio = _classPrivateFieldGet2.playerLottoProfitRatio;
 
         (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _View).LottoResultContent.renderLottoResultList(winningRankCountList);
 
-        (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _View).LottoResultContent.renderLottoResultYield(playerLottoYield);
+        (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _View).LottoResultContent.renderLottoResultProfitRatio(playerLottoProfitRatio);
       } catch (error) {
         var errorInputIndex = (0,_utils_Lotto_validator__WEBPACK_IMPORTED_MODULE_4__.getWinningNumberErrorIndexList)(winningNumberList);
 
@@ -328,10 +328,6 @@ var Lotto = /*#__PURE__*/function () {
   (0,_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Lotto, [{
     key: "pushNumberIntoPickedNumber",
     value: function pushNumberIntoPickedNumber(putNumber) {
-      if (_classPrivateMethodGet(this, _isNumberListComplete, _isNumberListComplete2).call(this)) {
-        return;
-      }
-
       (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _pickedNumberList).add(putNumber);
     }
   }, {
@@ -531,8 +527,8 @@ var LottosModel = /*#__PURE__*/function () {
       return output;
     }
   }, {
-    key: "getWinningYield",
-    value: function getWinningYield(winningRankCountList) {
+    key: "getWinningProfitRatio",
+    value: function getWinningProfitRatio(winningRankCountList) {
       var WINNING_AMOUNT_UNIT = _constants_setting__WEBPACK_IMPORTED_MODULE_4__.LOTTO_SETTING.WINNING_AMOUNT_UNIT;
       var winningTotalAmount = (0,_utils_data_manager__WEBPACK_IMPORTED_MODULE_5__.arraySum)(winningRankCountList.map(function (value, index) {
         return value * WINNING_AMOUNT_UNIT[index];
@@ -543,10 +539,10 @@ var LottosModel = /*#__PURE__*/function () {
     key: "result",
     get: function get() {
       var winningRankCountList = this.getWinningCount();
-      var playerLottoYield = this.getWinningYield(winningRankCountList);
+      var playerLottoProfitRatio = this.getWinningProfitRatio(winningRankCountList);
       return {
         winningRankCountList: winningRankCountList,
-        playerLottoYield: playerLottoYield
+        playerLottoProfitRatio: playerLottoProfitRatio
       };
     }
   }]);
@@ -575,7 +571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "makeLottosCountTemplate": () => (/* binding */ makeLottosCountTemplate),
 /* harmony export */   "makeLottoTemplate": () => (/* binding */ makeLottoTemplate),
 /* harmony export */   "makeLottoResultTemplate": () => (/* binding */ makeLottoResultTemplate),
-/* harmony export */   "makeLottoResultYieldText": () => (/* binding */ makeLottoResultYieldText)
+/* harmony export */   "makeLottoResultProfitRatioText": () => (/* binding */ makeLottoResultProfitRatioText)
 /* harmony export */ });
 /* harmony import */ var _constants_selector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constants/selector */ "./src/js/constants/selector.js");
 /* harmony import */ var _constants_setting__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../constants/setting */ "./src/js/constants/setting.js");
@@ -594,8 +590,8 @@ var makeLottoResultTemplate = function makeLottoResultTemplate(winningRankCountL
     return "<tr>\n        <td>".concat(WINNING_NUMBER_UNIT[rankIndex], "</td>\n        <td>").concat(WINNING_AMOUNT_UNIT[rankIndex].toLocaleString(), "</td>\n        <td").concat(count > 0 && ' class="bold"' || '', ">").concat(count, "\uAC1C</td$>\n      </tr>");
   }).join('');
 };
-var makeLottoResultYieldText = function makeLottoResultYieldText(playerLottoYield) {
-  return "\uB2F9\uC2E0\uC758 \uCD1D \uC218\uC775\uB960\uC740 ".concat(playerLottoYield.toLocaleString(), "% \uC785\uB2C8\uB2E4.");
+var makeLottoResultProfitRatioText = function makeLottoResultProfitRatioText(playerLottoProfitRatio) {
+  return "\uB2F9\uC2E0\uC758 \uCD1D \uC218\uC775\uB960\uC740 ".concat(playerLottoProfitRatio.toLocaleString(), "% \uC785\uB2C8\uB2E4.");
 };
 
 /***/ }),
@@ -1011,7 +1007,7 @@ var _container = /*#__PURE__*/new WeakMap();
 
 var _lottoResultList = /*#__PURE__*/new WeakMap();
 
-var _lottoResultYield = /*#__PURE__*/new WeakMap();
+var _lottoResultProfitRatio = /*#__PURE__*/new WeakMap();
 
 var _lottoRetryButton = /*#__PURE__*/new WeakMap();
 
@@ -1033,7 +1029,7 @@ var LottoResultView = /*#__PURE__*/function () {
       value: void 0
     });
 
-    _classPrivateFieldInitSpec(this, _lottoResultYield, {
+    _classPrivateFieldInitSpec(this, _lottoResultProfitRatio, {
       writable: true,
       value: void 0
     });
@@ -1061,9 +1057,9 @@ var LottoResultView = /*#__PURE__*/function () {
       (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _lottoResultList).innerHTML = (0,_utils_Lotto_template_manager__WEBPACK_IMPORTED_MODULE_6__.makeLottoResultTemplate)(winningRankCountList);
     }
   }, {
-    key: "renderLottoResultYield",
-    value: function renderLottoResultYield(playerLottoYield) {
-      (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _lottoResultYield).innerHTML = (0,_utils_Lotto_template_manager__WEBPACK_IMPORTED_MODULE_6__.makeLottoResultYieldText)(playerLottoYield);
+    key: "renderLottoResultProfitRatio",
+    value: function renderLottoResultProfitRatio(playerLottoProfitRatio) {
+      (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _lottoResultProfitRatio).innerHTML = (0,_utils_Lotto_template_manager__WEBPACK_IMPORTED_MODULE_6__.makeLottoResultProfitRatioText)(playerLottoProfitRatio);
     }
   }, {
     key: "bindLottoRetryButton",
@@ -1081,7 +1077,7 @@ var LottoResultView = /*#__PURE__*/function () {
 function _defaultElements2() {
   (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoResultList, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_RESULT_LIST));
 
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoResultYield, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_YIELD_TEXT));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoResultProfitRatio, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_PROFIT_RATIO_TEXT));
 
   (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoRetryButton, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_RETRY_BUTTON));
 }

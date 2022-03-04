@@ -88,7 +88,7 @@ section#lotto-result-modal #lotto-result-list tr:hover {
 section#lotto-result-modal #lotto-result-list td.bold {
   font-weight: bold;
 }
-section#lotto-result-modal #lotto-yield-text {
+section#lotto-result-modal #lotto-profit-ratio-text {
   font-weight: bold;
   text-align: center;
   margin-bottom: 2rem;
@@ -194,7 +194,7 @@ body {
 #app input[type=text].error {
   border-color: #ee5353;
   background-color: #f4dddd;
-  animation: 0.13s ease-out 3 uhxpx8g;
+  animation: 0.13s ease-out 3 u1m4dhr;
 }
 #app input[type=number].error:focus,
 #app input[type=text].error:focus {
@@ -204,7 +204,7 @@ body {
 #app input[type=text].error::placeholder {
   color: #8e3d3d;
 }
-@keyframes uhxpx8g {
+@keyframes u1m4dhr {
   0% {
     transform: translateX(-1rem);
   }
@@ -289,9 +289,9 @@ body {
 }
 #app .error-message.show {
   display: block;
-  animation: 0.3s ease uhxpx94;
+  animation: 0.3s ease u1m4dif;
 }
-@keyframes uhxpx94 {
+@keyframes u1m4dif {
   from {
     opacity: 0;
     transform: translateX(10%);
@@ -318,9 +318,9 @@ body {
   left: 0px;
   overflow-y: scroll;
   padding-bottom: 5rem;
-  animation: 0.3s ease uhxpx9h;
+  animation: 0.3s ease u1m4din;
 }
-@keyframes uhxpx9h {
+@keyframes u1m4din {
   from {
     opacity: 0;
     backdrop-filter: blur(0rem);
@@ -343,7 +343,7 @@ body {
   padding: 0.7rem;
   top: 15%;
   box-shadow: 0 0 10rem 0.5rem rgba(0, 0, 0, 0.55);
-  animation: 0.3s ease uhxpx9l;
+  animation: 0.3s ease u1m4dja;
 }
 @media (max-width: 755px) {
   #app .modal-container .modal-form {
@@ -387,7 +387,7 @@ body {
 #app .modal-container .modal-form .modal-content {
   padding-bottom: 2rem;
 }
-@keyframes uhxpx9l {
+@keyframes u1m4dja {
   from {
     opacity: 0;
     transform: translateY(-30%);
@@ -399,9 +399,9 @@ body {
 }
 @media (max-width: 755px) {
   #app .modal-container .modal-form {
-    animation: 0.3s ease uhxpx9z;
+    animation: 0.3s ease u1m4dk6;
   }
-  @keyframes uhxpx9z {
+  @keyframes u1m4dk6 {
     from {
       opacity: 0;
       transform: translate3d(-50%, -30%, 0);
@@ -413,9 +413,9 @@ body {
   }
 }
 #app .modal-container.disappear {
-  animation: 0.3s ease uhxpxa0;
+  animation: 0.3s ease u1m4dkx;
 }
-@keyframes uhxpxa0 {
+@keyframes u1m4dkx {
   from {
     opacity: 1;
     backdrop-filter: blur(1rem);
@@ -428,9 +428,9 @@ body {
   }
 }
 #app .modal-container.disappear .modal-form {
-  animation: 0.3s ease uhxpxa9;
+  animation: 0.3s ease u1m4dl0;
 }
-@keyframes uhxpxa9 {
+@keyframes u1m4dl0 {
   from {
     opacity: 1;
     transform: translateY(0%);
@@ -442,9 +442,9 @@ body {
 }
 @media (max-width: 755px) {
   #app .modal-container.disappear .modal-form {
-    animation: 0.3s ease uhxpxac;
+    animation: 0.3s ease u1m4dla;
   }
-  @keyframes uhxpxac {
+  @keyframes u1m4dla {
     from {
       opacity: 1;
       transform: translate3d(-50%, 0%, 0);
