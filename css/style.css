@@ -150,7 +150,7 @@ body {
     width: 100%;
   }
 }
-#app button.btn {
+#app button.button {
   width: 100%;
   max-height: 100%;
   background-color: #00bcd4;
@@ -162,11 +162,11 @@ body {
   transition: filter 0.2s ease, background-color 0.3s ease;
   cursor: pointer;
 }
-#app button.btn:disabled {
+#app button.button:disabled {
   background-color: #b4b4b4;
   cursor: default;
 }
-#app button.btn:hover:not(:disabled) {
+#app button.button:hover:not(:disabled) {
   filter: brightness(1.1);
 }
 #app input[type=number],
@@ -194,7 +194,7 @@ body {
 #app input[type=text].error {
   border-color: #ee5353;
   background-color: #f4dddd;
-  animation: 0.13s ease-out 3 u1m4dhr;
+  animation: 0.13s ease-out 3 us814oc;
 }
 #app input[type=number].error:focus,
 #app input[type=text].error:focus {
@@ -204,7 +204,7 @@ body {
 #app input[type=text].error::placeholder {
   color: #8e3d3d;
 }
-@keyframes u1m4dhr {
+@keyframes us814oc {
   0% {
     transform: translateX(-1rem);
   }
@@ -289,9 +289,9 @@ body {
 }
 #app .error-message.show {
   display: block;
-  animation: 0.3s ease u1m4dif;
+  animation: 0.3s ease us814ou;
 }
-@keyframes u1m4dif {
+@keyframes us814ou {
   from {
     opacity: 0;
     transform: translateX(10%);
@@ -318,9 +318,9 @@ body {
   left: 0px;
   overflow-y: scroll;
   padding-bottom: 5rem;
-  animation: 0.3s ease u1m4din;
+  animation: 0.3s ease us814pn;
 }
-@keyframes u1m4din {
+@keyframes us814pn {
   from {
     opacity: 0;
     backdrop-filter: blur(0rem);
@@ -343,7 +343,7 @@ body {
   padding: 0.7rem;
   top: 15%;
   box-shadow: 0 0 10rem 0.5rem rgba(0, 0, 0, 0.55);
-  animation: 0.3s ease u1m4dja;
+  animation: 0.3s ease us814q3;
 }
 @media (max-width: 755px) {
   #app .modal-container .modal-form {
@@ -387,7 +387,7 @@ body {
 #app .modal-container .modal-form .modal-content {
   padding-bottom: 2rem;
 }
-@keyframes u1m4dja {
+@keyframes us814q3 {
   from {
     opacity: 0;
     transform: translateY(-30%);
@@ -399,9 +399,9 @@ body {
 }
 @media (max-width: 755px) {
   #app .modal-container .modal-form {
-    animation: 0.3s ease u1m4dk6;
+    animation: 0.3s ease us814r1;
   }
-  @keyframes u1m4dk6 {
+  @keyframes us814r1 {
     from {
       opacity: 0;
       transform: translate3d(-50%, -30%, 0);
@@ -413,9 +413,9 @@ body {
   }
 }
 #app .modal-container.disappear {
-  animation: 0.3s ease u1m4dkx;
+  animation: 0.3s ease us814rl;
 }
-@keyframes u1m4dkx {
+@keyframes us814rl {
   from {
     opacity: 1;
     backdrop-filter: blur(1rem);
@@ -428,9 +428,9 @@ body {
   }
 }
 #app .modal-container.disappear .modal-form {
-  animation: 0.3s ease u1m4dl0;
+  animation: 0.3s ease us814sd;
 }
-@keyframes u1m4dl0 {
+@keyframes us814sd {
   from {
     opacity: 1;
     transform: translateY(0%);
@@ -442,9 +442,9 @@ body {
 }
 @media (max-width: 755px) {
   #app .modal-container.disappear .modal-form {
-    animation: 0.3s ease u1m4dla;
+    animation: 0.3s ease us814sf;
   }
-  @keyframes u1m4dla {
+  @keyframes us814sf {
     from {
       opacity: 1;
       transform: translate3d(-50%, 0%, 0);

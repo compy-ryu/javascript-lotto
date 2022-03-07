@@ -27,46 +27,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 
 var SELECTOR = Object.freeze({
-  APP: '#app',
-  ERROR_MESSAGE: '.error-message',
-  MODAL_CONTAINER: '.modal-container',
-  MODAL_CLOSE: '.modal-close',
-  NUMBER_TOGGLE: '#lotto-number-toggle',
-  LOTTO_PURCHASE_BUTTON: '#lotto-purchase-button',
-  LOTTO_MONEY_INPUT: '#lotto-money-input',
-  LOTTO_BOUGHT_COUNT: '#lotto-bought-count',
-  LOTTO_SHOW_RESULT_BUTTON: '#show-result-button',
-  LOTTO_RESULT_LIST: '#lotto-result-list',
-  LOTTO_PROFIT_RATIO_TEXT: '#lotto-profit-ratio-text',
-  LOTTO_RETRY_BUTTON: '#lotto-retry-button',
-  LOTTO_RESULT_MODAL: '#lotto-result-modal',
-  LOTTO_NUMBER_TOGGLE: '.lotto-number-toggle',
-  LOTTO_MONEY_SECTION: '.lotto-money-section',
-  LOTTO_LIST_SECTION: '.lotto-list-section',
-  LOTTO_WINNING_NUMBER_SECTION: '.winning-number-section',
-  LOTTO_ITEM_CONTAINER: '.lotto-item-container',
-  LOTTO_ITEM: '.item',
-  LOTTO_ITEM_NUMBER: '.item-number',
-  LOTTO_WINNING_NUMBER: '.winning-number-input'
+  ID: Object.freeze({
+    APP: '#app',
+    NUMBER_TOGGLE: '#lotto-number-toggle',
+    LOTTO_PURCHASE_BUTTON: '#lotto-purchase-button',
+    LOTTO_MONEY_INPUT: '#lotto-money-input',
+    LOTTO_BOUGHT_COUNT: '#lotto-bought-count',
+    LOTTO_SHOW_RESULT_BUTTON: '#show-result-button',
+    LOTTO_RESULT_LIST: '#lotto-result-list',
+    LOTTO_PROFIT_RATIO_TEXT: '#lotto-profit-ratio-text',
+    LOTTO_RETRY_BUTTON: '#lotto-retry-button',
+    LOTTO_RESULT_MODAL: '#lotto-result-modal'
+  }),
+  CLASS: Object.freeze({
+    ERROR_MESSAGE: '.error-message',
+    MODAL_CONTAINER: '.modal-container',
+    MODAL_CLOSE: '.modal-close',
+    LOTTO_NUMBER_TOGGLE: '.lotto-number-toggle',
+    LOTTO_MONEY_SECTION: '.lotto-money-section',
+    LOTTO_LIST_SECTION: '.lotto-list-section',
+    LOTTO_WINNING_NUMBER_SECTION: '.winning-number-section',
+    LOTTO_ITEM_CONTAINER: '.lotto-item-container',
+    LOTTO_ITEM: '.item',
+    LOTTO_ITEM_NUMBER: '.item-number',
+    LOTTO_WINNING_NUMBER: '.winning-number-input'
+  })
 });
 
-var replaceSelectorToDomName = function replaceSelectorToDomName(origin) {
-  var output = {
-    ID: {},
-    CLASS: {}
-  };
+var replaceRemoveSelectorSymbol = function replaceRemoveSelectorSymbol(origin) {
+  var output = {};
   Object.entries(origin).forEach(function (_ref) {
     var _ref2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref, 2),
         key = _ref2[0],
         value = _ref2[1];
 
-    var name = value.substr(1);
-    if (value.substr(0, 1) === '#') output.ID[key] = name;else if (value.substr(0, 1) === '.') output.CLASS[key] = name;
+    output[key] = value.substr(1);
   });
   return output;
 };
 
-var DOM_NAME = Object.freeze(replaceSelectorToDomName(SELECTOR));
+var DOM_NAME = Object.freeze({
+  ID: replaceRemoveSelectorSymbol(SELECTOR.ID),
+  CLASS: replaceRemoveSelectorSymbol(SELECTOR.CLASS)
+});
 
 /***/ }),
 
@@ -173,11 +176,11 @@ var LottoController = /*#__PURE__*/function () {
     _classPrivateFieldInitSpec(this, _View, {
       writable: true,
       value: {
-        MoneyInput: new _views_MoneyInputView__WEBPACK_IMPORTED_MODULE_5__["default"](_constants_selector__WEBPACK_IMPORTED_MODULE_3__.SELECTOR.LOTTO_MONEY_SECTION),
-        LottoList: new _views_LottoListView__WEBPACK_IMPORTED_MODULE_6__["default"](_constants_selector__WEBPACK_IMPORTED_MODULE_3__.SELECTOR.LOTTO_LIST_SECTION),
-        WinningNumberInput: new _views_WinningNumberInputView__WEBPACK_IMPORTED_MODULE_7__["default"](_constants_selector__WEBPACK_IMPORTED_MODULE_3__.SELECTOR.LOTTO_WINNING_NUMBER_SECTION),
-        LottoResultModal: new _views_ModalView__WEBPACK_IMPORTED_MODULE_9__["default"](_constants_selector__WEBPACK_IMPORTED_MODULE_3__.SELECTOR.LOTTO_RESULT_MODAL),
-        LottoResultContent: new _views_LottoResultView__WEBPACK_IMPORTED_MODULE_8__["default"](_constants_selector__WEBPACK_IMPORTED_MODULE_3__.SELECTOR.LOTTO_RESULT_MODAL)
+        MoneyInput: new _views_MoneyInputView__WEBPACK_IMPORTED_MODULE_5__["default"](),
+        LottoList: new _views_LottoListView__WEBPACK_IMPORTED_MODULE_6__["default"](),
+        WinningNumberInput: new _views_WinningNumberInputView__WEBPACK_IMPORTED_MODULE_7__["default"](),
+        LottoResultContent: new _views_LottoResultView__WEBPACK_IMPORTED_MODULE_8__["default"](),
+        LottoResultModal: new _views_ModalView__WEBPACK_IMPORTED_MODULE_9__["default"](_constants_selector__WEBPACK_IMPORTED_MODULE_3__.SELECTOR.ID.LOTTO_RESULT_MODAL)
       }
     });
 
@@ -478,12 +481,11 @@ var LottosModel = /*#__PURE__*/function () {
       var arrayToNumberList = numberList.map(function (value) {
         return Number(value);
       });
-      var LOTTO_NUMBER_LENGTH = _constants_setting__WEBPACK_IMPORTED_MODULE_4__.LOTTO_SETTING.LOTTO_NUMBER_LENGTH,
-          BONUS_NUMBER_LENGTH = _constants_setting__WEBPACK_IMPORTED_MODULE_4__.LOTTO_SETTING.BONUS_NUMBER_LENGTH;
+      var LOTTO_NUMBER_LENGTH = _constants_setting__WEBPACK_IMPORTED_MODULE_4__.LOTTO_SETTING.LOTTO_NUMBER_LENGTH;
 
       (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _winningNumberList, arrayToNumberList.slice(0, LOTTO_NUMBER_LENGTH));
 
-      (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _bonusNumber, arrayToNumberList.slice(LOTTO_NUMBER_LENGTH, LOTTO_NUMBER_LENGTH + BONUS_NUMBER_LENGTH).shift());
+      (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _bonusNumber, arrayToNumberList[arrayToNumberList.length - 1]);
     }
   }, {
     key: "getWinningRank",
@@ -508,11 +510,7 @@ var LottosModel = /*#__PURE__*/function () {
     value: function getWinningCount() {
       var _this2 = this;
 
-      var output = Array.from({
-        length: _constants_setting__WEBPACK_IMPORTED_MODULE_4__.LOTTO_SETTING.RACKING_START_NUMBER
-      }, function () {
-        return 0;
-      });
+      var output = Array(_constants_setting__WEBPACK_IMPORTED_MODULE_4__.LOTTO_SETTING.RACKING_START_NUMBER).fill(0);
 
       (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _lottos).forEach(function (lotto) {
         var rankIndex = _this2.getWinningRank(lotto.pickedNumber);
@@ -798,7 +796,7 @@ var setDelay = function setDelay(millisecond) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "isNumber": () => (/* binding */ isNumber),
+/* harmony export */   "isNumberString": () => (/* binding */ isNumberString),
 /* harmony export */   "isPositiveInteger": () => (/* binding */ isPositiveInteger),
 /* harmony export */   "isDivisible": () => (/* binding */ isDivisible),
 /* harmony export */   "isNumberRange": () => (/* binding */ isNumberRange),
@@ -808,12 +806,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "hasDuplicateItem": () => (/* binding */ hasDuplicateItem),
 /* harmony export */   "getDuplicateIndex": () => (/* binding */ getDuplicateIndex)
 /* harmony export */ });
-var isNumber = function isNumber(value) {
+var isNumberString = function isNumberString(value) {
   return /^[0-9]*$/g.test(value);
 };
 
 var isPositiveInteger = function isPositiveInteger(value) {
-  return isNumber(value) && value > 0;
+  return isNumberString(value) && value > 0;
 };
 
 var isDivisible = function isDivisible(value, number) {
@@ -896,7 +894,7 @@ var _lottoNumberToggle = /*#__PURE__*/new WeakMap();
 var _lottoItemContainer = /*#__PURE__*/new WeakMap();
 
 var LottoListView = /*#__PURE__*/function () {
-  function LottoListView(containerSelector) {
+  function LottoListView() {
     (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, LottoListView);
 
     _classPrivateFieldInitSpec(this, _container, {
@@ -914,11 +912,11 @@ var LottoListView = /*#__PURE__*/function () {
       value: void 0
     });
 
-    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)(containerSelector));
+    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)(_constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.CLASS.LOTTO_LIST_SECTION));
 
-    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoNumberToggle, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.NUMBER_TOGGLE));
+    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoNumberToggle, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.NUMBER_TOGGLE));
 
-    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoItemContainer, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_ITEM_CONTAINER));
+    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoItemContainer, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.CLASS.LOTTO_ITEM_CONTAINER));
 
     this.init();
   }
@@ -957,7 +955,7 @@ var LottoListView = /*#__PURE__*/function () {
       (0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _lottoItemContainer).innerHTML = lottos.map(function (numbers) {
         return (0,_utils_Lotto_template_manager__WEBPACK_IMPORTED_MODULE_6__.makeLottoTemplate)(numbers);
       }).join('');
-      (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_BOUGHT_COUNT).textContent = (0,_utils_Lotto_template_manager__WEBPACK_IMPORTED_MODULE_6__.makeLottosCountTemplate)(lottos.length);
+      (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.LOTTO_BOUGHT_COUNT).textContent = (0,_utils_Lotto_template_manager__WEBPACK_IMPORTED_MODULE_6__.makeLottosCountTemplate)(lottos.length);
     }
   }]);
 
@@ -1014,7 +1012,7 @@ var _lottoRetryButton = /*#__PURE__*/new WeakMap();
 var _defaultElements = /*#__PURE__*/new WeakSet();
 
 var LottoResultView = /*#__PURE__*/function () {
-  function LottoResultView(containerSelector) {
+  function LottoResultView() {
     (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, LottoResultView);
 
     _classPrivateMethodInitSpec(this, _defaultElements);
@@ -1039,7 +1037,7 @@ var LottoResultView = /*#__PURE__*/function () {
       value: void 0
     });
 
-    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)(containerSelector));
+    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)(_constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.LOTTO_RESULT_MODAL));
 
     _classPrivateMethodGet(this, _defaultElements, _defaultElements2).call(this);
 
@@ -1075,11 +1073,11 @@ var LottoResultView = /*#__PURE__*/function () {
 }();
 
 function _defaultElements2() {
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoResultList, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_RESULT_LIST));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoResultList, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.LOTTO_RESULT_LIST));
 
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoResultProfitRatio, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_PROFIT_RATIO_TEXT));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoResultProfitRatio, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.LOTTO_PROFIT_RATIO_TEXT));
 
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoRetryButton, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_RETRY_BUTTON));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _lottoRetryButton, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.LOTTO_RETRY_BUTTON));
 }
 
 
@@ -1152,7 +1150,7 @@ var ModalView = /*#__PURE__*/function () {
       value: void 0
     });
 
-    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _modalContainer, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_7__.$)(_constants_selector__WEBPACK_IMPORTED_MODULE_6__.SELECTOR.MODAL_CONTAINER));
+    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _modalContainer, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_7__.$)(_constants_selector__WEBPACK_IMPORTED_MODULE_6__.SELECTOR.CLASS.MODAL_CONTAINER));
 
     (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _modalContent, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_7__.$)(modalContentSelector));
 
@@ -1277,7 +1275,7 @@ var _bindViewEvents = /*#__PURE__*/new WeakSet();
 var _handleMoneyInputValue = /*#__PURE__*/new WeakSet();
 
 var MoneyInputView = /*#__PURE__*/function () {
-  function MoneyInputView(containerSelector) {
+  function MoneyInputView() {
     (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, MoneyInputView);
 
     _classPrivateMethodInitSpec(this, _handleMoneyInputValue);
@@ -1306,7 +1304,7 @@ var MoneyInputView = /*#__PURE__*/function () {
       value: void 0
     });
 
-    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)(containerSelector));
+    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)(_constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.CLASS.LOTTO_MONEY_SECTION));
 
     _classPrivateMethodGet(this, _defaultElements, _defaultElements2).call(this);
 
@@ -1356,11 +1354,11 @@ var MoneyInputView = /*#__PURE__*/function () {
 }();
 
 function _defaultElements2() {
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _moneyInput, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_MONEY_INPUT));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _moneyInput, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.LOTTO_MONEY_INPUT));
 
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _moneyInputSubmit, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.LOTTO_PURCHASE_BUTTON));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _moneyInputSubmit, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ID.LOTTO_PURCHASE_BUTTON));
 
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _moneyInputErrorMessage, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.ERROR_MESSAGE));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _moneyInputErrorMessage, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_5__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_2__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_4__.SELECTOR.CLASS.ERROR_MESSAGE));
 }
 
 function _bindViewEvents2() {
@@ -1438,7 +1436,7 @@ var _isWinningNumberListEnter = /*#__PURE__*/new WeakSet();
 var _handleWinningNumberInputValue = /*#__PURE__*/new WeakSet();
 
 var WinningNumberInputView = /*#__PURE__*/function () {
-  function WinningNumberInputView(containerSelector) {
+  function WinningNumberInputView() {
     (0,_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, WinningNumberInputView);
 
     _classPrivateMethodInitSpec(this, _handleWinningNumberInputValue);
@@ -1473,7 +1471,7 @@ var WinningNumberInputView = /*#__PURE__*/function () {
       value: void 0
     });
 
-    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$)(containerSelector));
+    (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _container, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$)(_constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.CLASS.LOTTO_WINNING_NUMBER_SECTION));
 
     _classPrivateMethodGet(this, _defaultElements, _defaultElements2).call(this);
 
@@ -1514,7 +1512,7 @@ var WinningNumberInputView = /*#__PURE__*/function () {
       var handleInputChange = function handleInputChange(_ref) {
         var $target = _ref.target;
         $target.classList.remove('error');
-        var inputErrorCount = (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(_this, _container), "".concat(_constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.LOTTO_WINNING_NUMBER, ".error")).length;
+        var inputErrorCount = (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(_this, _container), "".concat(_constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.CLASS.LOTTO_WINNING_NUMBER, ".error")).length;
 
         if (inputErrorCount > 0) {
           return;
@@ -1553,11 +1551,11 @@ var WinningNumberInputView = /*#__PURE__*/function () {
 }();
 
 function _defaultElements2() {
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _winningNumberInputList, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.LOTTO_WINNING_NUMBER));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _winningNumberInputList, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.CLASS.LOTTO_WINNING_NUMBER));
 
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _winningNumberSubmitButton, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.LOTTO_SHOW_RESULT_BUTTON));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _winningNumberSubmitButton, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.ID.LOTTO_SHOW_RESULT_BUTTON));
 
-  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _winningNumberErrorMessage, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.ERROR_MESSAGE));
+  (0,_babel_runtime_helpers_classPrivateFieldSet__WEBPACK_IMPORTED_MODULE_4__["default"])(this, _winningNumberErrorMessage, (0,_utils_element_manager__WEBPACK_IMPORTED_MODULE_6__.$)((0,_babel_runtime_helpers_classPrivateFieldGet__WEBPACK_IMPORTED_MODULE_3__["default"])(this, _container), _constants_selector__WEBPACK_IMPORTED_MODULE_5__.SELECTOR.CLASS.ERROR_MESSAGE));
 }
 
 function _bindViewEvents2() {
@@ -1571,7 +1569,7 @@ function _isWinningNumberInput2($input) {
 
 function _isWinningNumberComplete2($input) {
   var inputValue = $input.value;
-  return inputValue.length === 2 && (0,_utils_validator__WEBPACK_IMPORTED_MODULE_7__.isNumber)(inputValue);
+  return inputValue.length === 2 && (0,_utils_validator__WEBPACK_IMPORTED_MODULE_7__.isNumberString)(inputValue);
 }
 
 function _isWinningNumberListEnter2() {
